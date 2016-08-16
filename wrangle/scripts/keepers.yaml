@@ -1,0 +1,11 @@
+absolutes:
+  - name: Total population
+    composed_of:
+      - B000XX_011
+
+ratios:
+  - name: 18 and over
+    composed_of:
+      - B000X0011
+    divided_by:
+      - B000XX_011

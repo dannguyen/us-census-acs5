@@ -1,0 +1,278 @@
+B01003:
+  concept: Total population
+  variables:
+    - name: '001'
+      label: Total
+      readable_name: Total population
+      slug: total_population
+
+B11011:
+  concept: Household Type by Units in Structure
+  variables:
+    - name: '001'
+      label: 'Total'
+      readable_name: 'Total households'
+      slug: total_households
+    - name: '002'
+      label: 'Family households'
+      readable_name: 'Family households'
+      slug: family_households
+    - name: '003'
+      label: 'Family households:!!Married-couple family'
+      readable_name: 'Married-couple family households'
+      slug: married_couple_family_households
+
+
+B01001:
+  concept: Sex by Age
+  variables:
+    - name: '002'
+      label: Male
+      readable_name: Males
+      slug: males
+    - name: '026'
+      label: Female
+      readable_name: Females
+      slug: females
+
+
+B01002:
+  concept: Median Age by Sex
+  variables:
+    - name: '001'
+      label: Median age; Total
+      readable_name: Median age, overall
+      slug: median_age_overall
+
+B23006:
+  concept: Educational Attainment By Employment Status For The Population 25 To 64 Years
+  variables:
+    - name: '001'
+      label: total
+      readable_name: Adults, aged 25 to 64
+      slug: adults_aged_25_to_64
+    - name: '023'
+      label: "Bachelor's degree or higher for adults 25 to 64"
+      readable_name: Adults, aged 25 to 64, with a bachelor's degree
+      slug: adults_aged_25_to_64_with_bachelors_degree
+
+B15003:
+  concept: Educational Attainment for the Population 25 Years and over
+  variables:
+    - name: '001'
+      label: Total
+      readable_name: Population, 25 years and over
+      slug: population_25_years_and_over
+    - name: '017'
+      label: Regular high school diploma
+      readable_name: High school diploma (population, 25 years and over)
+      slug: high_school_diploma_population_25_years_and_over
+
+    - name: '019'
+      label: Some college, less than 1 year
+      readable_name: Some college, less than 1 year (population, 25 years and over)
+      slug: some_college_less_than_1_year_population_25_years_and_over
+
+    - name: '020'
+      label: Some college, more than 1 year, no degree
+      readable_name: Some college, 1+ year but no degree (population, 25 years and over)
+      slug: some_college_more_than_1_year_no_degree_population_25_years_and_over
+    - name: '021'
+      label: Associate's degree
+      readable_name: Associate's degree (population, 25 years and over)
+      slug: associates_degree_population_25_years_and_over
+
+    - name: '022'
+      label: Bachelor's degree
+      readable_name: Bachelor's degree (population, 25 years and over)
+      slug: bachelors_degree_population_25_years_and_over
+
+    - name: '023'
+      label: Master's degree
+      readable_name: Master's degree (population, 25 years and over)
+      slug: masters_degree_population_25_years_and_over
+    - name: '024'
+      label: Professional school degree
+      readable_name: Professional school degree (population, 25 years and over)
+      slug: profesional_degree_population_25_years_and_over
+    - name: '025'
+      label: Doctorate degree
+      readable_name: Doctorate degree (population, 25 years and over)
+      slug: doctorate_degree_population_25_years_and_over
+
+
+
+
+B16001:
+  concept: Language Spoken at Home by Ability to Speak English for the Population 5+ Yrs
+  variables:
+    - name: '001'
+      label: Total
+      readable_name: Population, 5 years and over
+      slug: population_5_years_and_over
+    - name: '002'
+      label: Speak only English
+      readable_name: Population, 5 years and over, English-only
+      slug: english_only_population_5_years_and_over
+
+B06012:
+  concept: Place Of Birth By Poverty Status In The Past 12 Months In The United States
+  variables:
+    - name: '002'
+      label: Below 100 percent of the poverty level
+      readable_name: Population below poverty line
+      slug: population_below_poverty_line
+
+B07001:
+  concept: Geographical Mobility in the Past Year by Age for Current Residence in the U.S.
+  variables:
+    - name: '017'
+      label: Same house 1 year ago
+      readable_name: Same house 1 year ago
+      slug: same_house_1_year_ago
+
+
+    ## we use these for the standard population counts
+    - name: '002'
+      label: 1 to 4 years
+      readable_name: Population, 1 to 4
+      slug: population_1_to_4
+    - name: '003'
+      label: 5 to 17 years
+      readable_name: Population, 5-17
+      slug: population_5_to_17
+    - name: '004'
+      label: 18 and 19 years
+      readable_name: Population, 18-19
+      slug: population_18_to_19
+    - name: '005'
+      label: 20 to 24 years
+      readable_name: Population, 20-24
+      slug: population_20_to_24
+    - name: '006'
+      label: 25 to 29 years
+      readable_name: Population, 25-29
+      slug: population_25_to_29
+    - name: '007'
+      label: 30 to 34 years
+      readable_name: Population, 30-34
+      slug: population_30_to_34
+    - name: '008'
+      label: 35 to 39 years
+      readable_name: Population, 35-39
+      slug: population_35_to_39
+    - name: '009'
+      label: 40 to 44 years
+      readable_name: Population, 40-44
+      slug: population_40_to_44
+    - name: '010'
+      label: 45 to 49 years
+      readable_name: Population, 45-49
+      slug: population_45_to_49
+    - name: '011'
+      label: 50 to 54 years
+      readable_name: Population, 50-54
+      slug: population_50_to_54
+    - name: '012'
+      label: 55 to 59 years
+      readable_name: Population, 55-59
+      slug: population_55_to_59
+    - name: '013'
+      label: 60 to 64 years
+      readable_name: Population, 60-64
+      slug: population_60_to_64
+    - name: '014'
+      label: 65 to 69 years
+      readable_name: Population, 65-69
+      slug: population_65_to_69
+    - name: '015'
+      label: 70 to 74 years
+      readable_name: Population, 70-74
+      slug: population_70_to_74
+    - name: '016'
+      label: 75 years and over
+      readable_name: Population, 75+
+      slug: population_75_and_over
+
+B25075:
+  concept: Value for Owner-Occupied Housing Units
+  variables:
+    - name: '023'
+      label: '$500,000 to $749,999'
+      readable_name: "Owner-Occupied Homes Valued at $500,000 to $749,999"
+      slug: owner_occupied_homes_valued_at_500000_to_749999
+    - name: '024'
+      label: '$750,000 to $999,999'
+      readable_name: "Owner-Occupied Homes Valued at $750,000 to $999,999"
+      slug: owner_occupied_homes_valued_at_750000_to_999999
+    - name: '025'
+      label: '$1,000,000 or more'
+      readable_name: "Owner-Occupied Homes Valued at $1M+"
+      slug: owner_occupied_homes_valued_at_1_million_plus
+
+B25077:
+  concept:  Median Value (Dollars) for Owner-Occupied Housing Units
+  variables:
+    - name: '001'
+      label: Median value (dollars)
+      readable_name: Median value for owner-occupied housing units
+      slug: owner_occupied_homes_median_value
+
+B19301:
+  concept: Per Capita Income in the Past 12 Months (in 2014 Inflation-Adjusted Dollars)
+  variables:
+    - name: '001'
+      label: Per capita income in the past 12 months (in 2014 Inflation-adjusted dollars)
+      readable_name: Per capita income
+      slug: per_capita_income
+
+B19001:
+  concept: Household Income in the Past 12 Months (in 2014 Inflation-Adjusted Dollars)
+  variables:
+    - name: '017'
+      label: $200,000 or more
+      readable_name: Households with $200,000+ income
+      slug: households_income_200000_or_more
+
+B19013:
+  concept: Median Household Income in the Past 12 Months (in 2014 Inflation-Adjusted Dollars)
+  variables:
+    - name: '001'
+      label: Median household income in the past 12 months (in 2014 Inflation-adjusted dollars)
+      readable_name: Median household income
+      slug: median_household_income
+
+B06001:
+  concept: Place of Birth by Age in the United States
+  variables:
+    - name: '049'
+      label: Foreign born
+      readable_name: Foreign-born population
+      slug: foreign_born_population
+
+B21001:
+  concept: Sex By Age By Veteran Status For The Civilian Population 18 Years And Over
+  variables:
+    - name: '001'
+      label: Total
+      readable_name: Civilian population, 18 years and over
+      slug: population_18_years_and_over
+    - name: '002'
+      label: Veteran
+      readable_name: Veterans, 18 years and over
+      slug: veterans_18_years_and_over
+
+
+B21003:
+  concept: Veteran Status by Educational Attainment for the Civilian Population 25 and Over
+  variables:
+    - name: '001'
+      label: Total
+      readable_name: Civilian_population, 25 and over
+      slug: Civilian_population_25_and_over
+      note: Redundant but not the same with B15003_001
+
+    - name: '002'
+      label: Veteran
+      readable_name: Veterans, 25 and over
+      slug: veterans_25_and_over
