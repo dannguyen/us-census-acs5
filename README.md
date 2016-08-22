@@ -20,8 +20,11 @@ http://api.census.gov/data/2014/acs5?for=county:085&in=state:06&get=B06011_001E,
 Todo:
 
 Get nation:
-http://api.census.gov/data/2009/acs5?get=NAME,B01001_001E&for=us:*
-2009/us
+2009/us/1/B01001_001.csv
+http://api.census.gov/data/2009/acs5?get=NAME,B01001_001E,B01001_001M&for=us:*
+
+
+
 
 ```
 [["NAME","B01001_001E","us"],
@@ -67,7 +70,8 @@ http://api.census.gov/data/2009/acs5?get=NAME,B01001_001E&for=congressional+dist
 
 
 Get state/tracts:
-2009/tract/06/B01001
+year/areatype/state/county/tractnum/B01001_001
+2009/tract/06/001/400600/B01001
 
 http://api.census.gov/data/2009/acs5?get=NAME,B01001_001E&for=tract:*&in=state:06
 

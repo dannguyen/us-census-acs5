@@ -5,6 +5,7 @@ CORRAL_DIR = WRANGLE_DIR. / 'corral'
 SCRIPTS_DIR = WRANGLE_DIR / 'scripts'
 DIRS = {
     :fetched => CORRAL_DIR / ('fetched'),
+    :fetched_acs5 => (CORRAL_DIR / 'fetched' / 'acs5'),
     :compiled => CORRAL_DIR / ('compiled'),
     :published => DATA_DIR,
 }
