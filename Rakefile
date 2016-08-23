@@ -1,4 +1,5 @@
 require 'pathname'
+require 'open3'
 DATA_DIR = Pathname 'data'
 WRANGLE_DIR = Pathname 'wrangle'
 CORRAL_DIR = WRANGLE_DIR. / 'corral'
@@ -9,6 +10,8 @@ DIRS = {
     :compiled => CORRAL_DIR / ('compiled'),
     :published => DATA_DIR,
 }
+
+DEFAULT_API_KEY = open("census-api-key.txt", 'r').read().strip()
 
 
 F_FILES = Hash[{
@@ -28,6 +31,33 @@ task :setup do
         puts "Created directory: #{p}"
     end
 end
+
+
+desc 'fetch all data for all geos'
+task :batch_fetch_data => I_FILES['variables'] do
+    ['us', 'county', 'state', 'congressional-district'].each do |geo|
+        (2009..2014).each do |year|
+        stdout, stdeerr, status = Open3.capture3 [
+                    'python',
+                    SCRIPTS_DIR / 'parse_lookups.py',
+                    '|', 'csvcut -c table_name',
+                    '|', "sed '1d'"].join(' ')
+
+            stdout.split("\n").each do |table_name|
+                sh ['echo python',
+                    SCRIPTS_DIR / 'fetch_table.py',
+                    "--year #{year}",
+                    "--geo #{geo}",
+                    "--table #{table_name}",
+                    "--api-key #{DEFAULT_API_KEY}",
+                    "--extdir #{DIRS[:fetched_acs5]}"
+                    ].join(' ')
+            end
+        end
+    end
+
+end
+
 
 
 desc "Create easy-to-read variables text file"

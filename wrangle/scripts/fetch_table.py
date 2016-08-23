@@ -18,12 +18,19 @@ from sys import stdout
 from urllib.parse import urljoin
 
 BASE_SRC_URL = 'http://api.census.gov/data/{year}/acs5'
-VALID_GEOS = ['us', 'state', 'county', 'congressional+district']
+VALID_GEOS = ['us', 'state', 'county', 'congressional-district']
 VALID_YEARS = [2009, 2010, 2011, 2012, 2014]
 LOGGY = loggy("fetch_table")
 
 def build_request(key, year, table, geo, geo_in=None):
     baseurl = BASE_SRC_URL.format(year=year)
+
+    # special case for congressional-district, which is actually
+    # congressional+district, but it's a pain to get Requests to not
+    # percent-escape it...
+    if geo == 'congressional-district':
+        geo = 'congressional district'
+
     parms = {'get': ','.join(["NAME", table+'E', table+'M']),
              'for': '{0}:*'.format(geo),
              'key': key,
