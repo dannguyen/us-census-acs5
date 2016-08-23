@@ -71,6 +71,14 @@ B01001:
       readable_name: Females; 40-44
       slug: females_40_to_44
 
+B01001G:
+  concept: Sex By Age (Two or More Races)
+  variables:
+    - name: '001'
+      label: Total
+      readable_name: Mixed race
+      slug: mixed_race
+
 B01002:
   concept: Median Age by Sex
   variables:
@@ -78,6 +86,48 @@ B01002:
       label: Median age; Total
       readable_name: Median age, overall
       slug: median_age
+
+B03002:
+  concept: Race
+  variables:
+    - name: '003'
+      label: 'White alone'
+      readable_name: White
+      slug: white
+    - name: '004'
+      label: 'Black or African American alone'
+      readable_name: Black
+      slug: black
+    - name: '005'
+      label: 'American Indian and Alaska Native alone'
+      readable_name: Native American and Alaskan
+      slug: native_american_and_alaskan
+    - name: '006'
+      label: 'Asian alone'
+      readable_name: Asian alone
+      slug: asian
+    - name: '007'
+      label: 'Native Hawaiian and Other Pacific Islander alone'
+      readable_name: Pacific Islander and Hawaiian
+      slug: pacific_islander_and_hawaiian
+    - name: '008'
+      label: 'Some other race alone'
+      readable_name: Other race
+      slug: other_race
+
+
+
+
+
+B03003:
+  concept: Hispanic or Latino Origin
+  variables:
+    - name: '001'
+      label: Total
+      readable_name: Hispanic or Latino
+      slug: hispanic_or_latino
+
+
 
 B11011:
   concept: Household Type by Units in Structure
@@ -94,10 +144,6 @@ B11011:
       label: 'Family households:!!Married-couple family'
       readable_name: 'Married-couple family households'
       slug: married_couple_family_households
-
-
-
-
 
 
 B23006:

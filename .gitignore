@@ -1,5 +1,6 @@
 *.zip
 census-api-key.txt
+_tmp
 wrangle/corral
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -34,8 +34,8 @@ end
 
 
 desc 'fetch all data for all geos'
-task :batch_fetch_data => I_FILES['variables'] do
-
+task :batch_fetch_data, [:year] => I_FILES['variables'] do |t, args|
+    year = args.year
     # first, get a list of table names
     tablenames = []
 
@@ -56,9 +56,9 @@ task :batch_fetch_data => I_FILES['variables'] do
         while (line=stdout.gets) do; statefips << line.strip; end
     end
 
-    (2011..2014).each do |year|
-       # ['us', 'county', 'state', 'congressional-district', 'tract']
-        ['tract'].each do |geo|
+    puts year
+
+       ['us', 'county', 'state', 'congressional-district', 'tract'].each do |geo|
             tablenames.each do |table_name|
                 puts ""
                 if geo == 'tract'
@@ -85,7 +85,6 @@ task :batch_fetch_data => I_FILES['variables'] do
                 end
             end
         end
-    end
 
 end
 

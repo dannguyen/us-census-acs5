@@ -35,10 +35,15 @@ def build_request(key, year, table, geo, in_geo=None):
     if geo == 'congressional-district':
         geo = 'congressional district'
 
-    parms = {'get': ','.join(["NAME", table+'E', table+'M']),
+    parms = {
              'for': '{0}:*'.format(geo),
              'key': key,
             }
+    if table:
+        parms['get'] = ','.join(["NAME", "GEOID", table+'E', table+'M'])
+    else:
+        parms['get'] = 'NAME,GEOID'
+
     if in_geo:
         parms['in'] = in_geo
     req = Request('GET', baseurl, params=parms)
@@ -80,8 +85,8 @@ def parsey_the_argeys():
     parser = argparse.ArgumentParser("Fetch a single table of ACS5 data for a single geography for a single year")
     parser.add_argument('--year', type=int, required=True,
         help="Year of ACS5 to collect: %s" % str(VALID_YEARS))
-    parser.add_argument('--table', type=str, required=True,
-        help="Table of ACS5 to collect, e.g. 'B01001_001' (leave out E and M suffixes)")
+    parser.add_argument('--table', type=str, required=False,
+        help="Table of ACS5 to collect, e.g. 'B01001_001' (leave out E and M suffixes). Leave blank if you just want NAME")
     parser.add_argument('--geo', type=str, required=True,
         help="Name of geography: %s" % ', '.join(VALID_GEOS))
     parser.add_argument('--in-geo', type=str, required=False,
@@ -104,12 +109,16 @@ def parsey_the_argeys():
         raise IOError("Year must be in %s" % str(VALID_YEARS))
     elif geo not in VALID_GEOS:
         raise IOError("Geography must be in %s" % VALID_GEOS)
-    elif table[-1] in ['E', 'M']:
-        raise IOError("Don't specify 'E' or 'M' suffix, e.g. `B01001_001`")
-    elif len(table) != 10:
-        raise IOError("Table must be in form of `B01001_001`")
+    elif table:
+        if table[-1] in ['E', 'M']:
+            raise IOError("Don't specify 'E' or 'M' suffix, e.g. `B01001_001`")
+        elif len(table) not in [10, 11]:
+            raise IOError("Table must be in form of `B01001_001` or `B01001G_001`")
     elif in_geo and not re.match(r'.+?:\d+', in_geo):
         raise IOError("--in-geo argument must look like `state:06`, not %s" % in_geo)
+
+    if not table:
+        LOGGY.info("No table specified; just fetching NAME and GEOID")
 
     if dest_dir:
         pd = Path(dest_dir)

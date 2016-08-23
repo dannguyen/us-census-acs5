@@ -6,7 +6,7 @@ to a directory-tree with this structure:
 
     2009/
     2010
-    2011/
+    2012/
        B01001_001/
           tract/
              tract-in-state-01.csv
@@ -25,7 +25,7 @@ Expects each CSV to look like:
 
 Outputs a single file:
 
-year,table_id,place_name,geo_type,geo_id,state,county,value,margin_of_error
+year,table_id,geo_type,geo_id,geo_slug,state,county,value,margin_of_error
 2009,B01001_001,United States,us,1,,,301461533,0
 """
 
@@ -41,8 +41,8 @@ LOGGY = loggy('compile_tables')
 GEOS = ['us', 'state', 'county', 'congressional-district', 'tract']
 
 COMPILED_HEADERS = [
-    'year', 'table_id', 'place_name',
-    'geo_type', 'geo_id', 'state', 'county',
+    'year', 'table_id',
+    'geo_type', 'geo_id', 'geo_slug', 'state', 'county',
     'value', 'margin_of_error',
 ]
 
@@ -50,6 +50,8 @@ COMPILED_HEADERS = [
 if __name__ == '__main__':
     parser = argparse.ArgumentParser("Compile the fetched Census tables for a (year) directory")
     parser.add_argument('srcdir', type=str, help='Assumes the directory is named after a year')
+    parser.add_argument('destdir', type=str, help='Point to a directory in which to create a new subdirectory to output to')
+
     args = parser.parse_args()
     srcdir = Path(args.srcdir)
     year = srcdir.name
@@ -59,11 +61,17 @@ if __name__ == '__main__':
     table_ids = [p.name for p in srcdir.glob('*')]
     LOGGY.info("Tables counted: %s" % len(table_ids))
 
-    csvout = DictWriter(stdout, fieldnames=COMPILED_HEADERS)
-    csvout.writeheader()
+    for geo in GEOS:
+        destpath = Path(args.destdir) / year / (geo + '.csv')
+        LOGGY.info("Writing to: %s" % destpath)
+        destpath.parent.mkdir(parents=True, exist_ok=True)
+        destfile = destpath.open('w')
+        csvout = DictWriter(destfile, fieldnames=COMPILED_HEADERS)
+        csvout.writeheader()
+        rowcount = 0
 
-    for tableid in table_ids:
-        for geo in GEOS:
+        for tableid in table_ids:
+
             if geo == 'tract': # this could be made more meta in case we handle other small types...
                 srcpaths = (srcdir / tableid / 'tract').glob('*.csv')
             else:
@@ -84,9 +92,9 @@ if __name__ == '__main__':
                 for row in csvin:
                     d = {'year': year,
                          'table_id': tableid,
-                         'place_name': row['NAME'],
+                         'geo_id': row['GEOID'],
                          'geo_type': geo,
-                         'geo_id': row[file_geo_type]} # dang congressional+districts
+                         'geo_slug': row[file_geo_type]} # dang congressional+districts
 
                     d['value'] = row[tableid + 'E']
                     d['margin_of_error'] = row[tableid + 'M']
@@ -96,7 +104,8 @@ if __name__ == '__main__':
 
                     # all done, now time to write row
                     csvout.writerow(d)
+                    rowcount += 1
 
-
-    stdout.close()
+        LOGGY.info("\tWrote %s rows" % rowcount)
+        destfile.close()
 
