@@ -35,16 +35,21 @@ end
 
 desc 'fetch all data for all geos'
 task :batch_fetch_data => I_FILES['variables'] do
-    ['us', 'county', 'state', 'congressional-district'].each do |geo|
-        (2009..2014).each do |year|
-        stdout, stdeerr, status = Open3.capture3 [
+
+    (2009..2014).each do |year|
+        ['us', 'county', 'state', 'congressional-district'].each do |geo|
+           stdout, stdeerr, status = Open3.capture3 [
                     'python',
                     SCRIPTS_DIR / 'parse_lookups.py',
                     '|', 'csvcut -c table_name',
-                    '|', "sed '1d'"].join(' ')
+                    '|', "sed '1d'",
+                    # '|', 'grep "B06009"',
+
+                ].join(' ')
 
             stdout.split("\n").each do |table_name|
-                sh ['echo python',
+                puts ""
+                sh ['python',
                     SCRIPTS_DIR / 'fetch_table.py',
                     "--year #{year}",
                     "--geo #{geo}",

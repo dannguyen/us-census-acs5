@@ -1,10 +1,83 @@
-B01003:
-  concept: Total population
+B01001:
+  concept: Sex by Age
   variables:
     - name: '001'
       label: Total
       readable_name: Total population
       slug: total_population
+
+    - name: '002'
+      label: Male
+      readable_name: Males
+      slug: males
+
+    - name: '009'
+      label: Male; 21 years
+      readable_name: Males; 21
+      slug: males_21
+
+    - name: '010'
+      label: Male; 22 to 24 years
+      readable_name: Males; 22-24
+      slug: males_22_to_24
+
+    - name: '011'
+      label: Male; 25 to 29 years
+      readable_name: Males; 25-29
+      slug: males_25_to_29
+
+    - name: '012'
+      label: Male; 30 to 34 years
+      readable_name: Males; 30-34
+      slug: males_30_to_34
+
+    - name: '013'
+      label: Male; 35 to 39 years
+      readable_name: Males; 35-39
+      slug: males_35_to_39
+    - name: '014'
+      label: Male; 40 to 44 years
+      readable_name: Males; 40-44
+      slug: males_40_to_44
+
+    - name: '026'
+      label: Female
+      readable_name: Females
+      slug: females
+
+    - name: '033'
+      label: Female; 21 years
+      readable_name: Females; 21
+      slug: females_21
+
+    - name: '034'
+      label: Female; 22 to 24 years
+      readable_name: Females; 22-24
+      slug: females_22_to_24
+    - name: '035'
+      label: Female; 25 to 29 years
+      readable_name: Females; 25-29
+      slug: females_25_to_29
+    - name: '036'
+      label: Female; 30 to 34 years
+      readable_name: Females; 30-34
+      slug: females_30_to_34
+    - name: '037'
+      label: Female; 35 to 39 years
+      readable_name: Females; 35-39
+      slug: females_35_to_39
+    - name: '038'
+      label: Female; 40 to 44 years
+      readable_name: Females; 40-44
+      slug: females_40_to_44
+
+B01002:
+  concept: Median Age by Sex
+  variables:
+    - name: '001'
+      label: Median age; Total
+      readable_name: Median age, overall
+      slug: median_age
 
 B11011:
   concept: Household Type by Units in Structure
@@ -23,26 +96,9 @@ B11011:
       slug: married_couple_family_households
 
 
-B01001:
-  concept: Sex by Age
-  variables:
-    - name: '002'
-      label: Male
-      readable_name: Males
-      slug: males
-    - name: '026'
-      label: Female
-      readable_name: Females
-      slug: females
 
 
-B01002:
-  concept: Median Age by Sex
-  variables:
-    - name: '001'
-      label: Median age; Total
-      readable_name: Median age, overall
-      slug: median_age_overall
+
 
 B23006:
   concept: Educational Attainment By Employment Status For The Population 25 To 64 Years
@@ -56,49 +112,43 @@ B23006:
       readable_name: Adults, aged 25 to 64, with a bachelor's degree
       slug: adults_aged_25_to_64_with_bachelors_degree
 
-B15003:
-  concept: Educational Attainment for the Population 25 Years and over
+B06009:
+  note: |
+    The official description for B06009's concept does not specify
+    "25 years and over" but B15003_001E (2011+) is equivalent to
+    B06009_001E (2009-2014)
+  concept: Place Of Birth By Educational Attainment In The United States (Population 25 Years and over)
   variables:
     - name: '001'
       label: Total
       readable_name: Population, 25 years and over
+      note: See the note for the parent concept. Need to verify that this is 25 years+ TKTK
       slug: population_25_years_and_over
-    - name: '017'
-      label: Regular high school diploma
-      readable_name: High school diploma (population, 25 years and over)
-      slug: high_school_diploma_population_25_years_and_over
 
-    - name: '019'
-      label: Some college, less than 1 year
-      readable_name: Some college, less than 1 year (population, 25 years and over)
-      slug: some_college_less_than_1_year_population_25_years_and_over
+    - name: '002'
+      label:  Less than high school graduate
+      readable_name: Less than high school graduate (population, 25 years and over)
+      slug: less_than_high_school_graduate_25_years_and_over
 
-    - name: '020'
-      label: Some college, more than 1 year, no degree
-      readable_name: Some college, 1+ year but no degree (population, 25 years and over)
-      slug: some_college_more_than_1_year_no_degree_population_25_years_and_over
-    - name: '021'
-      label: Associate's degree
-      readable_name: Associate's degree (population, 25 years and over)
-      slug: associates_degree_population_25_years_and_over
+    - name: '003'
+      label:  High school graduate (includes equivalency)
+      readable_name: High school graduate or equivalent (population, 25 years and over)
+      slug: high_school_graduate_population_25_years_and_over
 
-    - name: '022'
+    - name: '004'
+      label: Some college or associate's degree
+      readable_name: "Some college or associate's degree (population, 25 years and over)"
+      slug: some_college_population_25_years_and_over
+
+    - name: '005'
       label: Bachelor's degree
       readable_name: Bachelor's degree (population, 25 years and over)
       slug: bachelors_degree_population_25_years_and_over
 
-    - name: '023'
-      label: Master's degree
-      readable_name: Master's degree (population, 25 years and over)
-      slug: masters_degree_population_25_years_and_over
-    - name: '024'
-      label: Professional school degree
-      readable_name: Professional school degree (population, 25 years and over)
-      slug: profesional_degree_population_25_years_and_over
-    - name: '025'
-      label: Doctorate degree
-      readable_name: Doctorate degree (population, 25 years and over)
-      slug: doctorate_degree_population_25_years_and_over
+    - name: '006'
+      label: Graduate or professional degree
+      readable_name: Graduate or professional degree (population, 25 years and over)
+      slug: graduate_or_professional_degree_population_25_years_and_over
 
 
 

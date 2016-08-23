@@ -19,7 +19,7 @@ from urllib.parse import urljoin
 
 BASE_SRC_URL = 'http://api.census.gov/data/{year}/acs5'
 VALID_GEOS = ['us', 'state', 'county', 'congressional-district']
-VALID_YEARS = [2009, 2010, 2011, 2012, 2014]
+VALID_YEARS = [2009, 2010, 2011, 2012, 2013, 2014]
 LOGGY = loggy("fetch_table")
 
 def build_request(key, year, table, geo, geo_in=None):
@@ -40,6 +40,9 @@ def build_request(key, year, table, geo, geo_in=None):
     req = Request('GET', baseurl, params=parms)
     return req.prepare()
 
+
+def build_filepath(year, table, geo):
+    return Path(str(year), table, geo + '.csv')
 
 def make_request(prepped_request):
     session = Session()
@@ -93,7 +96,7 @@ def parsey_the_argeys():
         if not pd.is_dir():
             raise IOError("First argument must be a valid directory name.")
         else:
-            dest_path = pd.joinpath(str(year), table, geo + '.csv')
+            dest_path = pd.joinpath(build_filepath(year, table, geo))
     else:
         dest_path = None
 
@@ -103,22 +106,26 @@ def parsey_the_argeys():
 
 if __name__ == '__main__':
     argy = parsey_the_argeys()
-    prepped_req = build_request(key=argy['api_key'], year=argy['year'],
-                                table=argy['table'], geo=argy['geo'],
-                                geo_in=argy['geo_in'])
-
-    LOGGY.info("Fetching: %s" % prepped_req.url)
-    data = make_request(prepped_req)
-
-    LOGGY.info("Received %s rows" % len(data))
-    # Now make the destination file, or write to stdout
-    if not argy['dest_path']:
-        outs = stdout
+    # early cutoff if file exists
+    if argy['dest_path'] and argy['dest_path'].exists():
+        LOGGY.info("%s already exists" % argy['dest_path'])
     else:
-        argy['dest_path'].parent.mkdir(parents=True, exist_ok=True)
-        outs = argy['dest_path'].open('w')
+        prepped_req = build_request(key=argy['api_key'], year=argy['year'],
+                                    table=argy['table'], geo=argy['geo'],
+                                    geo_in=argy['geo_in'])
 
-    LOGGY.info("Writing to: %s" %  outs.name)
-    csvout = csv.writer(outs)
-    for row in data:
-        csvout.writerow(row)
+        LOGGY.info("Fetching: %s" % prepped_req.url)
+        data = make_request(prepped_req)
+
+        LOGGY.info("Received %s rows" % len(data))
+        # Now make the destination file, or write to stdout
+        if not argy['dest_path']:
+            outs = stdout
+        else:
+            argy['dest_path'].parent.mkdir(parents=True, exist_ok=True)
+            outs = argy['dest_path'].open('w')
+
+        LOGGY.info("Writing to: %s" %  outs.name)
+        csvout = csv.writer(outs)
+        for row in data:
+            csvout.writerow(row)
