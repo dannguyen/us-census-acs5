@@ -36,27 +36,53 @@ end
 desc 'fetch all data for all geos'
 task :batch_fetch_data => I_FILES['variables'] do
 
-    (2009..2014).each do |year|
-        ['us', 'county', 'state', 'congressional-district'].each do |geo|
-           stdout, stdeerr, status = Open3.capture3 [
-                    'python',
-                    SCRIPTS_DIR / 'parse_lookups.py',
+    # first, get a list of table names
+    tablenames = []
+
+    cmdtables = ['python', SCRIPTS_DIR / 'parse_lookups.py',
                     '|', 'csvcut -c table_name',
-                    '|', "sed '1d'",
-                    # '|', 'grep "B06009"',
+                    '|', "sed '1d'"].join(' ')
 
-                ].join(' ')
+    Open3.popen3(cmdtables) do |stdin, stdout, stderr|
+        while(line=stdout.gets) do; tablenames << line.strip; end
+    end
 
-            stdout.split("\n").each do |table_name|
+    # then, get state fips
+    statefips = []
+    cmdfips= ['cat', SCRIPTS_DIR / 'states-fips.csv',
+                   '|', 'csvcut -c fips',
+                   '|', "sed '1d'",].join(' ')
+    Open3.popen3(cmdfips) do |stdin, stdout, stderr|
+        while (line=stdout.gets) do; statefips << line.strip; end
+    end
+
+    (2011..2014).each do |year|
+       # ['us', 'county', 'state', 'congressional-district', 'tract']
+        ['tract'].each do |geo|
+            tablenames.each do |table_name|
                 puts ""
-                sh ['python',
-                    SCRIPTS_DIR / 'fetch_table.py',
-                    "--year #{year}",
-                    "--geo #{geo}",
-                    "--table #{table_name}",
-                    "--api-key #{DEFAULT_API_KEY}",
-                    "--extdir #{DIRS[:fetched_acs5]}"
-                    ].join(' ')
+                if geo == 'tract'
+                    statefips.each do |fips|
+                        sh ['python',
+                            SCRIPTS_DIR / 'fetch_table.py',
+                            "--year #{year}",
+                            "--geo #{geo}",
+                            "--table #{table_name}",
+                            "--api-key #{DEFAULT_API_KEY}",
+                            "--extdir #{DIRS[:fetched_acs5]}",
+                            "--in-geo state:#{fips}",
+                            ].join(' ')
+                    end
+                else
+                    sh ['python',
+                        SCRIPTS_DIR / 'fetch_table.py',
+                        "--year #{year}",
+                        "--geo #{geo}",
+                        "--table #{table_name}",
+                        "--api-key #{DEFAULT_API_KEY}",
+                        "--extdir #{DIRS[:fetched_acs5]}"
+                        ].join(' ')
+                end
             end
         end
     end
@@ -68,7 +94,7 @@ end
 desc "Create easy-to-read variables text file"
 file I_FILES['variables'] => F_FILES['variables'] do
     sh ['python',
-        SCRIPTS_DIR / 'collate_variables.py',
+        SCRIPTS_DIR / 'tablefy_lookups.py',
         F_FILES['variables'],
         '>', I_FILES['variables']
     ].join(' ')

@@ -1,3 +1,7 @@
+Examples:
+
+- http://www.nytimes.com/newsgraphics/2014/01/05/poverty-map/
+
 Documentation:
 http://www.census.gov/data/developers/data-sets/acs-survey-5-year-data.html
 http://api.census.gov/data/2014/acs5/examples.html
