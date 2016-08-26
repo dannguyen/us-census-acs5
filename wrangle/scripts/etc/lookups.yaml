@@ -86,6 +86,7 @@ B01002:
       label: Median age; Total
       readable_name: Median age, overall
       slug: median_age
+      type: float
 
 B03002:
   concept: Race
@@ -168,7 +169,8 @@ B06009:
     - name: '001'
       label: Total
       readable_name: Population, 25 years and over
-      note: See the note for the parent concept. Need to verify that this is 25 years+ TKTK
+      note: |
+        See the note for the parent concept. I've verified that this number matches other accumulations for 25+.
       slug: population_25_years_and_over
 
     - name: '002'
@@ -290,9 +292,24 @@ B07001:
       readable_name: Population, 75+
       slug: population_75_and_over
 
+B16007:
+  concept: "Age by Language Spoken at Home for the Population 5+ Yrs"
+  variables:
+    - name: '014'
+      label: 65 years and over
+      readable_name: Population, 65+
+      slug: population_65_and_over
+      note: We use this as a quick way to get 65+ and older
+
 B25075:
   concept: Value for Owner-Occupied Housing Units
   variables:
+    - name: '001'
+      label: Total
+      readable_name: Owner-Occupied Homes
+      slug: owner_occupied_homes
+      note: We use this as a way to get all owner occupied homes
+
     - name: '023'
       label: '$500,000 to $749,999'
       readable_name: "Owner-Occupied Homes Valued at $500,000 to $749,999"
@@ -365,7 +382,7 @@ B21003:
     - name: '001'
       label: Total
       readable_name: Civilian_population, 25 and over
-      slug: Civilian_population_25_and_over
+      slug: civilian_population_25_and_over
       note: Redundant but not the same with B15003_001
 
     - name: '002'

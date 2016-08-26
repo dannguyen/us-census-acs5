@@ -1,0 +1,55 @@
+base:
+  - total_population
+  - total_households
+  - median_age
+  - owner_occupied_homes_median_value
+  - per_capita_income
+
+ratios:
+  males: total_population
+  females: total_population
+  population_below_poverty_line: total_population
+  population_25_years_and_over: total_population
+  veterans_25_and_over: civilian_population_25_and_over
+
+  white: total_population
+  black: total_population
+  hispanic_or_latino: total_population
+  asian: total_population
+  native_american_and_alaskan: total_population
+  pacific_islander_and_hawaiian: total_population
+  other: total_population
+  mixed_race: total_population
+  less_than_high_school_graduate_25_years_and_over: population_25_years_and_over
+  high_school_graduate_population_25_years_and_over: population_25_years_and_over
+  english_only_population_5_years_and_over: population_5_years_and_over
+
+  same_house_1_year_ago: total_population
+?  married_couple_family_households: total_households
+
+?  owner_occupied_homes: total_households
+  households_income_200000_or_more: total_households
+  foreign_born_population: total_population
+  veterans_25_and_over: civilian_population_25_and_over
+
+composites:
+  - college_degree (includes phd?)
+    - bachelors_degree_population_25_years_and_over
+    - graduate_or_professional_degree_population_25_years_and_over
+
+  half_million_plus_owner_occupied_homes:
+    parts:
+      - owner_occupied_homes_valued_at_500000_to_749999
+      - owner_occupied_homes_valued_at_750000_to_999999
+      - owner_occupied_homes_valued_at_1_million_plus
+    divisor: owner_occupied_homes
+
+  seniors:
+    - population_65_to_69
+    - population_70_to_74
+    - population_75_and_over
+
+  - maletofemale ratio
+
+
+

@@ -10,7 +10,7 @@ import yaml
 import csv
 from sys import stdout
 
-LOOKUPS_PATH = Path('wrangle', 'scripts', 'lookups.yaml')
+LOOKUPS_PATH = Path('wrangle', 'scripts', 'etc', 'lookups.yaml')
 
 if __name__ == '__main__':
     lookups = yaml.load(LOOKUPS_PATH.read_text())
